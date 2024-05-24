@@ -14,21 +14,21 @@ public class RestApiUser {
     @Autowired
     UserRepo userRepo;
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAll/user")
     public List<Utilizator> getAll(){
         return userRepo.findAll();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create/user")
     public void create(@RequestBody Utilizator utilizator){
         userRepo.save(utilizator);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/user")
     public void update(@RequestBody Utilizator utilizator){
         userRepo.save(utilizator);}
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/user/{id}")
     public void delete(@PathVariable int id){
         userRepo.deleteById(id);
     }
