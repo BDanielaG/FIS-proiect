@@ -4,7 +4,7 @@ package com.fis.proiectFis.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Zbor {
@@ -13,41 +13,88 @@ public class Zbor {
     private int id;
     private int cod_zbor;
     private int nr_locuri_total;
-    private LocalDate ora_plecare;
-    private LocalDate ora_sosire;
+    private LocalDate data_plecare;
+    private LocalDate data_sosire;
     private String nume_companie;
-    private String sursa;
+    private String orasdus;
     private String destinatie;
     private int  nr_locuri_seniori;
     private int  nr_locuri_adulti;
     private int  nr_locuri_copii;
-    private float pret;
+    private float pret_economy;
+    private float pret_business;
+    private float pret_firstclass;
     private int locuri_business;
     private int locuri_economy;
-    private int lcouri_first;
+    private int locuri_first;
     private String zile_operare;
+    private double discount_retur;
+    private double discount_last_minute;
 //    private float discount;
+//@JsonIgnore
+@OneToMany(mappedBy = "zbor",
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    private List<Rezervare> rezervare;
 
+    public double getDiscount_retur() {
+        return discount_retur;
+    }
+
+    public void setDiscount_retur(double discount_retur) {
+        this.discount_retur = discount_retur;
+    }
+
+    public double getDiscount_last_minute() {
+        return discount_last_minute;
+    }
+
+    public void setDiscount_last_minute(double discount_last_minute) {
+        this.discount_last_minute = discount_last_minute;
+    }
+
+    public List<Rezervare> getRezervare() {
+        return rezervare;
+    }
+
+    public void setRezervare(List<Rezervare> rezervare) {
+        this.rezervare = rezervare;
+    }
+
+    public float getPret_business() {
+        return pret_business;
+    }
+
+    public void setPret_business(float pret_business) {
+        this.pret_business = pret_business;
+    }
+
+    public float getPret_firstclass() {
+        return pret_firstclass;
+    }
+
+    public void setPret_firstclass(float pret_firstclass) {
+        this.pret_firstclass = pret_firstclass;
+    }
 
     public Zbor() {
     }
 
-    public Zbor(int id, int cod_zbor, int nr_locuri_total, LocalDate ora_plecare, LocalDate ora_sosire, String nume_companie, String sursa, String destinatie, int nr_locuri_seniori, int nr_locuri_adulti, int nr_locuri_copii, float pret, int locuri_business, int locuri_economy, int lcouri_first, String zile_operare) {
+    public Zbor(int id, int cod_zbor, int nr_locuri_total, LocalDate data_plecare, LocalDate ora_sosire, String nume_companie, String orasdus, String destinatie, int nr_locuri_seniori, int nr_locuri_adulti, int nr_locuri_copii, float pret_economy, int locuri_business, int locuri_economy, int lcouri_first, String zile_operare) {
         this.id = id;
         this.cod_zbor = cod_zbor;
         this.nr_locuri_total = nr_locuri_total;
-        this.ora_plecare = ora_plecare;
-        this.ora_sosire = ora_sosire;
+        this.data_plecare = data_plecare;
+        this.data_sosire = ora_sosire;
         this.nume_companie = nume_companie;
-        this.sursa = sursa;
+        this.orasdus = orasdus;
         this.destinatie = destinatie;
         this.nr_locuri_seniori = nr_locuri_seniori;
         this.nr_locuri_adulti = nr_locuri_adulti;
         this.nr_locuri_copii = nr_locuri_copii;
-        this.pret = pret;
+        this.pret_economy = pret_economy;
         this.locuri_business = locuri_business;
         this.locuri_economy = locuri_economy;
-        this.lcouri_first = lcouri_first;
+        this.locuri_first = lcouri_first;
         this.zile_operare = zile_operare;
     }
 
@@ -75,20 +122,20 @@ public class Zbor {
         this.nr_locuri_total = nr_locuri_total;
     }
 
-    public LocalDate getOra_plecare() {
-        return ora_plecare;
+    public LocalDate getData_plecare() {
+        return data_plecare;
     }
 
-    public void setOra_plecare(LocalDate ora_plecare) {
-        this.ora_plecare = ora_plecare;
+    public void setData_plecare(LocalDate ora_plecare) {
+        this.data_plecare = ora_plecare;
     }
 
-    public LocalDate getOra_sosire() {
-        return ora_sosire;
+    public LocalDate getData_sosire() {
+        return data_sosire;
     }
 
-    public void setOra_sosire(LocalDate ora_sosire) {
-        this.ora_sosire = ora_sosire;
+    public void setData_sosire(LocalDate ora_sosire) {
+        this.data_sosire = ora_sosire;
     }
 
     public String getNume_companie() {
@@ -99,12 +146,12 @@ public class Zbor {
         this.nume_companie = nume_companie;
     }
 
-    public String getSursa() {
-        return sursa;
+    public String getOrasdus() {
+        return orasdus;
     }
 
-    public void setSursa(String sursa) {
-        this.sursa = sursa;
+    public void setOrasdus(String sursa) {
+        this.orasdus = sursa;
     }
 
     public String getDestinatie() {
@@ -139,12 +186,12 @@ public class Zbor {
         this.nr_locuri_copii = nr_locuri_copii;
     }
 
-    public float getPret() {
-        return pret;
+    public float getPret_economy() {
+        return pret_economy;
     }
 
-    public void setPret(float pret) {
-        this.pret = pret;
+    public void setPret_economy(float pret) {
+        this.pret_economy = pret;
     }
 
     public int getLocuri_business() {
@@ -163,12 +210,12 @@ public class Zbor {
         this.locuri_economy = locuri_economy;
     }
 
-    public int getLcouri_first() {
-        return lcouri_first;
+    public int getLocuri_first() {
+        return locuri_first;
     }
 
-    public void setLcouri_first(int lcouri_first) {
-        this.lcouri_first = lcouri_first;
+    public void setLocuri_first(int locuri_first) {
+        this.locuri_first = locuri_first;
     }
 
     public String getZile_operare() {

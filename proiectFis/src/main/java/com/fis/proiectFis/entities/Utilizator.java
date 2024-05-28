@@ -1,9 +1,9 @@
 package com.fis.proiectFis.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Utilizator {
@@ -15,7 +15,21 @@ public class Utilizator {
     private String nume;
     private String rol;
 
+
+    //@JsonIgnore
+    @OneToMany(mappedBy = "utilizator",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    private List<Rezervare> rezervare;
+
     public Utilizator() {
+    }
+
+    public List<Rezervare> getRezervare() {
+        return rezervare;
+    }
+
+    public void setRezervare(List<Rezervare> rezervare) {
+        this.rezervare = rezervare;
     }
 
     public Utilizator(int id, String parola, String email, String nume, String rol) {
@@ -24,6 +38,13 @@ public class Utilizator {
         this.email = email;
         this.nume = nume;
         this.rol = rol;
+    }
+
+    public void addRezervare(Rezervare rezervare)
+    {
+        if (this.rezervare==null) {this.rezervare=new ArrayList<>();}
+        this.rezervare.add(rezervare);
+        rezervare.setUtilizator(this);
     }
 
     public int getId() {

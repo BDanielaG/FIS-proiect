@@ -1,6 +1,7 @@
 package com.fis.proiectFis.restAPI;
 
 import com.fis.proiectFis.entities.Rezervare;
+import com.fis.proiectFis.entities.Utilizator;
 import com.fis.proiectFis.entities.Zbor;
 import com.fis.proiectFis.repositories.RezervareRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,6 @@ public class RestApiRezervare {
     @PutMapping("/update/rezervare")
     public void update(@RequestBody Rezervare rezervare){
         rezervareRepo.save(rezervare);}
+
+
 }
