@@ -21,6 +21,8 @@ public class Rezervare {
 //    private boolean cu_retur;
     private float discount_retur;
     private float discount_last_minute;
+    String nume;
+//    String
 
 
     @JsonIgnore
